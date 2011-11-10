@@ -76,7 +76,8 @@ char *getpass_hook(const char *prompt)
 
 # include <fcntl.h> 
 # include <sys/ioctl.h> 
-# include <termios.h> 
+# include <term.h>
+# include <openssl/ui_compat.h> 
 
 # if __FreeBSD_kernel__
 #  ifndef IUCLC
@@ -93,7 +94,7 @@ char *getpass_hook(const char *prompt)
 
 char *getpass_hook(const char *prompt)
 {
-#ifdef KERBEROS
+#ifdef HAVE_KERBEROS
 	char tmp[80];
 	des_read_pw_string(tmp, sizeof(tmp), (char *)prompt,
 					   0);
